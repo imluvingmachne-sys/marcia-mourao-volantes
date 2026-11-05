@@ -1,10 +1,10 @@
 // Dados da Marcia. Edite apenas este arquivo para atualizar o site.
 window.SITE = {
   // WhatsApp com DDI e DDD, somente números. Exemplo: "5511999999999"
-  whatsapp: "",
+  whatsapp: "5518991436108",
 
   // Cidade ou região atendida. Exemplo: "São Paulo e região"
-  cidade: "",
+  cidade: "Araçatuba, SP",
 
   // Usuário do Instagram, sem @.
   instagram: "",
