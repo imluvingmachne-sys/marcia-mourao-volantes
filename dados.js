@@ -9,13 +9,13 @@ window.SITE = {
   // Usuário do Instagram, sem @.
   instagram: "",
 
-  // Foto real do antes e depois no topo do site. Sem ela, aparece a ilustração.
-  // Exemplo: { antes: "fotos/etios-antes.jpg", depois: "fotos/etios-depois.jpg", carro: "Toyota Etios" }
-  destaque: null,
-
-  // Fotos reais dos trabalhos. Coloque os arquivos na pasta fotos/.
-  // Exemplo: { antes: "fotos/corolla-antes.jpg", depois: "fotos/corolla-depois.jpg", carro: "Toyota Corolla" }
-  fotos: [],
+  // Fotos da seção Resultados. Coloque os arquivos na pasta fotos/.
+  // Antes e depois devem ser quadradas, com o volante na mesma posição.
+  fotos: [
+    { carro: "Chery", tipo: "Couro descascando", antes: "fotos/chery-antes.webp", depois: "fotos/chery-depois.webp" },
+    { carro: "Ford", tipo: "Borracha gasta", antes: "fotos/ford-antes.webp", depois: "fotos/ford-depois.webp" },
+    { carro: "Volkswagen", tipo: "Volante simples de borracha", antes: "fotos/gol-antes.webp", depois: "fotos/gol-depois.webp" },
+  ],
 
   // Depoimentos reais de clientes.
   // Exemplo: { texto: "Ficou perfeito.", nome: "Ana S." }
