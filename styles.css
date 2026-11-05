@@ -391,7 +391,7 @@ figcaption { margin-top: 12px; color: var(--ash); font-size: 1rem; }
 .wa-float {
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: 76px;
   z-index: 15;
   display: grid;
   place-items: center;
