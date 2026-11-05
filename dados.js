@@ -1,4 +1,4 @@
-// Dados da Marcia. Edite apenas este arquivo para atualizar o site.
+// Dados do site. Edite apenas este arquivo para atualizar o site.
 window.SITE = {
   // WhatsApp com DDI e DDD, somente números. Exemplo: "5511999999999"
   whatsapp: "5518991436108",
