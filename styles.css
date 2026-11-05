@@ -208,7 +208,7 @@ h1 { font-size: clamp(4rem, 10.4vw, 11rem); }
 .compare-tag {
   position: absolute;
   top: 12px;
-  padding: 3px 10px;
+  padding: 8px 14px;
   border-radius: 4px;
   background: var(--black);
   color: var(--yellow);
