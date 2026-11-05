@@ -132,6 +132,7 @@ a:focus-visible, summary:focus-visible, input:focus-visible {
   background: var(--yellow);
 }
 h1 { font-size: clamp(2.875rem, 5.4vw, 5rem); }
+.hero-lead strong { color: var(--paper); }
 .hl { color: var(--yellow); }
 .hero-lead { max-width: 30em; margin: 20px 0 28px; color: var(--ash); font-size: 1.25rem; line-height: 1.4; }
 .hero-checks {
