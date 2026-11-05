@@ -145,7 +145,7 @@ h1 { font-size: clamp(2.35rem, 4.1vw, 5.5rem); }
 .compare-before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
 .compare-tag {
   position: absolute;
-  bottom: 16px;
+  top: 16px;
   z-index: 1;
   padding: 8px 14px;
   background: var(--black);
