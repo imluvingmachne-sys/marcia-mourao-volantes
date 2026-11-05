@@ -39,7 +39,7 @@
       cx: CX, cy: CY, r: 78, fill: "none", stroke: "#3A3A38", "stroke-width": 2,
     }));
     var mark = svgEl("text", { x: CX, y: CY + 21, "text-anchor": "middle", class: "hub-mark", fill: colors.mark });
-    mark.textContent = "MM";
+    mark.textContent = "VE";
     group.appendChild(mark);
   }
 
