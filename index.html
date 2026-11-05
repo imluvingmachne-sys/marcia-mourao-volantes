@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marcia Mourão | Restauração de volantes</title>
+  <meta name="description" content="Marcia Mourão restaura volantes automotivos à mão. Mande uma foto do seu volante e peça um orçamento.">
+  <meta name="theme-color" content="#FFD400">
+  <meta property="og:title" content="Marcia Mourão | Restauração de volantes">
+  <meta property="og:description" content="Volante gasto tem conserto. Mande uma foto e peça um orçamento.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23FFD400'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23000' stroke-width='4'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23000'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="hero">
+    <nav class="nav" aria-label="Principal">
+      <a class="brand" href="#">Marcia Mourão</a>
+      <div class="nav-links">
+        <a href="#servicos">Serviços</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#duvidas">Dúvidas</a>
+      </div>
+    </nav>
+
+    <div class="hero-text">
+      <p class="hero-role">Restauração de volantes<span data-cidade-sufixo></span></p>
+      <h1>Volante gasto tem conserto.</h1>
+      <p class="hero-lead">Marcia Mourão tira o desgaste, refaz o revestimento e costura seu volante à mão, ponto por ponto.</p>
+      <a class="btn btn-black" data-wa="Olá, Marcia! Vim pelo site e quero um orçamento para o meu volante." href="#contato">Pedir orçamento no WhatsApp</a>
+    </div>
+
+    <svg class="wheel" viewBox="0 0 800 800" role="img" aria-label="Volante preto sendo costurado com linha amarela">
+      <g id="wheel-turn">
+        <path class="spoke" d="M310 350 L70 335 L70 465 L320 480 Z"/>
+        <path class="spoke" d="M490 350 L730 335 L730 465 L480 480 Z"/>
+        <path class="spoke" d="M340 470 L305 735 L495 735 L460 470 Z"/>
+        <circle class="rim" cx="400" cy="400" r="330"/>
+        <circle class="rim-shine" cx="400" cy="400" r="362"/>
+        <g id="wheel-holes"></g>
+        <circle class="rim-groove" cx="400" cy="400" r="330"/>
+        <g id="wheel-stitches"></g>
+        <circle class="hub" cx="400" cy="400" r="118"/>
+        <circle class="hub-ring" cx="400" cy="400" r="100"/>
+        <text class="hub-mark" x="400" y="426" text-anchor="middle">MM</text>
+      </g>
+    </svg>
+  </header>
+
+  <main id="conteudo">
+    <div class="seam" aria-hidden="true"></div>
+
+    <section class="signs" aria-labelledby="sinais-titulo">
+      <div class="signs-text">
+        <h2 id="sinais-titulo">Quando vale restaurar</h2>
+        <ul class="signs-list">
+          <li>O aro está descascando ou esfarelando.</li>
+          <li>O volante gruda e suja a mão no calor.</li>
+          <li>A costura soltou ou o couro abriu.</li>
+          <li>A superfície ficou lisa, ressecada ou desbotada.</li>
+        </ul>
+      </div>
+
+      <figure class="compare-box">
+        <div class="compare" data-compare>
+          <svg class="compare-layer" viewBox="0 0 640 480" aria-hidden="true">
+            <defs>
+              <path id="aro" d="M-40 560 C 90 150, 400 40, 700 90"/>
+            </defs>
+            <rect width="640" height="480" fill="#1C1C1C"/>
+            <use href="#aro" fill="none" stroke="#000" stroke-width="170"/>
+            <use href="#aro" fill="none" stroke="#FFD400" stroke-width="24" stroke-dasharray="4 13"/>
+          </svg>
+          <svg class="compare-layer compare-before" viewBox="0 0 640 480" aria-hidden="true">
+            <rect width="640" height="480" fill="#1C1C1C"/>
+            <use href="#aro" fill="none" stroke="#2B2A28" stroke-width="170"/>
+            <g id="flakes"></g>
+          </svg>
+          <span class="compare-tag compare-tag-before">Antes</span>
+          <span class="compare-tag compare-tag-after">Depois</span>
+          <span class="compare-handle" aria-hidden="true"></span>
+          <input type="range" min="0" max="100" value="50" aria-label="Arraste para comparar antes e depois">
+        </div>
+        <figcaption>Ilustração do aro antes e depois da restauração. Arraste para comparar.</figcaption>
+      </figure>
+    </section>
+
+    <div class="seam" aria-hidden="true"></div>
+
+    <section class="services" id="servicos" aria-labelledby="servicos-titulo">
+      <h2 id="servicos-titulo">Dois jeitos de renovar</h2>
+      <div class="services-grid">
+        <article>
+          <h3>Revestimento do aro</h3>
+          <p>Capa nova na parte onde você segura, ajustada e costurada à mão sobre o volante original.</p>
+          <p class="service-fit">Para volante de borracha ou para quem quer renovar gastando menos.</p>
+        </article>
+        <article>
+          <h3>Restauração completa</h3>
+          <p>Aro e braços refeitos sob medida, com as divisões e costuras do volante original.</p>
+          <p class="service-fit">Para volante de couro que perdeu a aparência de fábrica.</p>
+        </article>
+      </div>
+      <p class="services-note">O preço depende do modelo e do estado do volante. Na dúvida, mande uma foto e Marcia indica o serviço certo.</p>
+    </section>
+
+    <section class="gallery" id="trabalhos" aria-labelledby="trabalhos-titulo" hidden>
+      <h2 id="trabalhos-titulo">Trabalhos da Marcia</h2>
+      <div class="gallery-grid" data-gallery></div>
+    </section>
+
+    <section class="steps" id="como-funciona" aria-labelledby="passos-titulo">
+      <h2 id="passos-titulo">Como funciona</h2>
+      <ol class="steps-list">
+        <li>
+          <h3>Mande uma foto</h3>
+          <p>Envie pelo WhatsApp uma foto do volante e o modelo do carro.</p>
+        </li>
+        <li>
+          <h3>Receba o orçamento</h3>
+          <p>Marcia avalia o desgaste e diz qual serviço, valor e prazo.</p>
+        </li>
+        <li>
+          <h3>Volante renovado</h3>
+          <p>Vocês combinam o dia e seu volante volta a ter pegada de novo.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="quotes" aria-labelledby="depoimentos-titulo" hidden>
+      <h2 id="depoimentos-titulo">Quem já restaurou</h2>
+      <div class="quotes-grid" data-quotes></div>
+    </section>
+
+    <section class="faq" id="duvidas" aria-labelledby="duvidas-titulo">
+      <h2 id="duvidas-titulo">Dúvidas</h2>
+      <div class="faq-list">
+        <details>
+          <summary>Meu volante está muito destruído. Ainda tem jeito?</summary>
+          <p>Na maioria das vezes, sim. Mande uma foto para Marcia avaliar o estado real antes de qualquer decisão.</p>
+        </details>
+        <details>
+          <summary>Quanto custa restaurar um volante?</summary>
+          <p>Depende do modelo, do desgaste e do serviço escolhido. O orçamento é feito a partir da foto.</p>
+        </details>
+        <details>
+          <summary>Qual a diferença entre capa e revestimento?</summary>
+          <p>A capa de encaixe fica solta por cima e deixa o aro mais grosso. O revestimento é ajustado e costurado no próprio volante.</p>
+        </details>
+        <details>
+          <summary>Preciso comprar um volante novo?</summary>
+          <p>Não. A restauração aproveita o volante do seu carro, que continua sendo o original.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="contact" id="contato" aria-labelledby="contato-titulo">
+      <h2 id="contato-titulo">Mande a foto do seu volante.</h2>
+      <p>Marcia responde com o serviço indicado e o orçamento.</p>
+      <a class="btn btn-black" data-wa="Olá, Marcia! Quero enviar a foto do meu volante para um orçamento." href="#contato">Pedir orçamento no WhatsApp</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Marcia Mourão, restauração de volantes<span data-cidade-sufixo></span></span>
+    <a data-instagram href="#" hidden>Instagram</a>
+  </footer>
+
+  <script src="dados.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
