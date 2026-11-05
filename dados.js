@@ -9,6 +9,10 @@ window.SITE = {
   // Usuário do Instagram, sem @.
   instagram: "",
 
+  // Foto real do antes e depois no topo do site. Sem ela, aparece a ilustração.
+  // Exemplo: { antes: "fotos/etios-antes.jpg", depois: "fotos/etios-depois.jpg", carro: "Toyota Etios" }
+  destaque: null,
+
   // Fotos reais dos trabalhos. Coloque os arquivos na pasta fotos/.
   // Exemplo: { antes: "fotos/corolla-antes.jpg", depois: "fotos/corolla-depois.jpg", carro: "Toyota Corolla" }
   fotos: [],
