@@ -2,15 +2,47 @@
   var site = window.SITE || {};
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function setPosition(box, value) {
-    box.querySelector("input").value = value;
-    box.style.setProperty("--pos", value + "%");
-  }
-
+  // A linha persegue o dedo com um pequeno atraso, então clique e arraste não dão salto.
   function setupCompare(box) {
     var input = box.querySelector("input");
-    input.addEventListener("input", function () { setPosition(box, input.value); });
-    setPosition(box, input.value);
+    var current = Number(input.value);
+    var target = current;
+    var lastTime = null;
+    var frameId = null;
+
+    function paint() { box.style.setProperty("--pos", current + "%"); }
+
+    function follow(time) {
+      var elapsed = lastTime === null ? 16 : time - lastTime;
+      lastTime = time;
+      current += (target - current) * (1 - Math.exp(-elapsed / 70));
+      if (Math.abs(target - current) < 0.05) current = target;
+      paint();
+      frameId = current === target ? null : requestAnimationFrame(follow);
+      if (frameId === null) lastTime = null;
+    }
+
+    function jump(value) {
+      if (frameId !== null) cancelAnimationFrame(frameId);
+      frameId = null;
+      lastTime = null;
+      current = target = Number(value);
+      input.value = value;
+      paint();
+    }
+
+    function glide(value) {
+      target = Number(value);
+      if (reduceMotion) { jump(value); return; }
+      if (frameId === null) frameId = requestAnimationFrame(follow);
+    }
+
+    input.addEventListener("input", function () { glide(input.value); });
+    box.compare = {
+      jump: jump,
+      glide: function (value) { input.value = value; glide(value); },
+    };
+    paint();
   }
 
   // Movimento único ao carregar: mostra que a linha pode ser arrastada.
@@ -21,7 +53,7 @@
     var startTime = null;
     var from = 82;
     var to = 50;
-    var duration = 1400;
+    var duration = 2000;
     function stop() { stopped = true; }
     input.addEventListener("pointerdown", stop);
     input.addEventListener("keydown", stop);
@@ -29,11 +61,12 @@
       if (stopped) return;
       if (startTime === null) startTime = time;
       var t = Math.min((time - startTime) / duration, 1);
-      setPosition(box, from + (to - from) * (1 - Math.pow(1 - t, 3)));
+      var eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      box.compare.jump(from + (to - from) * eased);
       if (t < 1) requestAnimationFrame(frame);
     }
-    setPosition(box, from);
-    setTimeout(function () { requestAnimationFrame(frame); }, 500);
+    box.compare.jump(from);
+    setTimeout(function () { requestAnimationFrame(frame); }, 900);
   }
 
   function setupContacts() {
@@ -74,14 +107,49 @@
     var before = box.querySelector("[data-antes]");
     var after = box.querySelector("[data-depois]");
     var buttons = [];
+    var active = null;
+
+    // Fusão: uma cópia do par atual fica por cima e some quando o novo par está pronto.
+    function crossfade() {
+      var ghost = document.createElement("div");
+      ghost.className = "compare-ghost";
+      ghost.setAttribute("aria-hidden", "true");
+      ghost.style.setProperty("--pos", box.style.getPropertyValue("--pos"));
+      [after, before].forEach(function (image) {
+        var copy = image.cloneNode();
+        copy.removeAttribute("loading");
+        copy.alt = "";
+        ghost.appendChild(copy);
+      });
+      box.insertBefore(ghost, box.querySelector(".compare-tag"));
+      return ghost;
+    }
+
+    function fadeOut(ghost) {
+      var ready = [before, after].map(function (image) {
+        return image.decode().catch(function () {});
+      });
+      var limit = new Promise(function (resolve) { setTimeout(resolve, 500); });
+      Promise.race([Promise.all(ready), limit]).then(function () {
+        ghost.animate({ opacity: [1, 0] }, { duration: 700, easing: "ease" }).onfinish = function () {
+          ghost.remove();
+        };
+      });
+    }
 
     function show(index) {
       var photo = photos[index];
-      before.src = photo.antes;
-      after.src = photo.depois;
+      var changing = active !== null && active !== index;
+      var ghost = changing ? crossfade() : null;
+      active = index;
+      if (ghost || before.getAttribute("src") !== photo.antes) {
+        before.src = photo.antes;
+        after.src = photo.depois;
+      }
       before.alt = "Volante do " + photo.carro + " antes: " + photo.tipo.toLowerCase();
       after.alt = "Volante do " + photo.carro + " depois do revestimento";
-      setPosition(box, 50);
+      box.compare.glide(50);
+      if (ghost) fadeOut(ghost);
       buttons.forEach(function (button, i) {
         button.setAttribute("aria-pressed", i === index ? "true" : "false");
       });
@@ -122,10 +190,43 @@
     grid.closest("section").hidden = false;
   }
 
+  // Abre e fecha cada dúvida pela altura. Clicar no meio do movimento inverte sem salto.
+  function setupFaq() {
+    if (reduceMotion) return;
+    document.querySelectorAll(".faq details").forEach(function (item) {
+      var summary = item.querySelector("summary");
+      var text = item.querySelector("p");
+      var running = null;
+
+      summary.addEventListener("click", function (event) {
+        event.preventDefault();
+        var from = item.offsetHeight;
+        var closing = item.open && !item.classList.contains("closing");
+        if (running) running.cancel();
+        item.open = true;
+        item.classList.toggle("closing", closing);
+        var to = closing ? summary.offsetHeight : item.offsetHeight;
+        var slide = item.animate(
+          { height: [from + "px", to + "px"] },
+          { duration: closing ? 380 : 480, easing: "cubic-bezier(0.22, 1, 0.36, 1)" }
+        );
+        item.style.overflow = "hidden";
+        running = slide;
+        if (!closing) text.animate({ opacity: [0, 1] }, { duration: 520, easing: "ease" });
+        slide.onfinish = function () {
+          running = null;
+          item.style.overflow = "";
+          item.classList.remove("closing");
+          if (closing) item.open = false;
+        };
+      });
+    });
+  }
+
   // Entrada discreta das seções, uma vez só. Sem JS, tudo já aparece.
   function setupReveal() {
     var items = document.querySelectorAll(".reveal");
-    if (reduceMotion || !("IntersectionObserver" in window)) {
+    if (!("IntersectionObserver" in window)) {
       items.forEach(function (item) { item.classList.add("in"); });
       return;
     }
@@ -140,7 +241,7 @@
       var siblings = Array.prototype.filter.call(item.parentElement.children, function (el) {
         return el.classList.contains("reveal");
       });
-      item.style.transitionDelay = Math.min(siblings.indexOf(item), 3) * 70 + "ms";
+      item.style.transitionDelay = Math.min(siblings.indexOf(item), 3) * 110 + "ms";
       observer.observe(item);
     });
   }
@@ -150,5 +251,6 @@
   sweepCompare(document.querySelector("[data-hero-compare]"));
   setupContacts();
   setupQuotes();
+  setupFaq();
   setupReveal();
 })();
